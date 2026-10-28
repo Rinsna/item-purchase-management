@@ -1,0 +1,286 @@
+{
+  "info": {
+    "_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "name": "Item & Purchase Management API",
+    "description": "API collection for Item & Purchase Management System built with Node.js, Express, and MySQL.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health & Test",
+      "item": [
+        {
+          "name": "Test Server API",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/test",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "test"]
+            },
+            "description": "Check if Express server is running and responding."
+          }
+        },
+        {
+          "name": "Test Database Connection",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/test-db",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "test-db"]
+            },
+            "description": "Test MySQL database connectivity."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Item Types",
+      "item": [
+        {
+          "name": "Get All Item Types",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/item-types",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "item-types"]
+            },
+            "description": "Returns list of all item types."
+          }
+        },
+        {
+          "name": "Create Item Type",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Stationery\",\n  \"description\": \"Pens, notebooks and desk supplies\",\n  \"is_active\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/item-types",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "item-types"]
+            },
+            "description": "Creates a new item type."
+          }
+        },
+        {
+          "name": "Update Item Type",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Stationery & Office Supplies\",\n  \"description\": \"Pens, notebooks, desk accessories\",\n  \"is_active\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/item-types/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "item-types", "1"]
+            },
+            "description": "Updates an existing item type."
+          }
+        },
+        {
+          "name": "Delete Item Type",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/item-types/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "item-types", "1"]
+            },
+            "description": "Deletes item type or deactivates it if items exist under it."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Items",
+      "item": [
+        {
+          "name": "Get All Items (with JOIN)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/items",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "items"]
+            },
+            "description": "Retrieves all items joined with item types."
+          }
+        },
+        {
+          "name": "Get Item by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/items/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "items", "1"]
+            },
+            "description": "Retrieves single item detail by ID."
+          }
+        },
+        {
+          "name": "Create Item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Wireless Keyboard\",\n  \"description\": \"Compact mechanical keyboard\",\n  \"item_type_id\": 1,\n  \"purchase_date\": \"2026-08-25\",\n  \"price\": 1200.00,\n  \"stock_available\": 15,\n  \"active\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/items",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "items"]
+            },
+            "description": "Creates a new item."
+          }
+        },
+        {
+          "name": "Update Item",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Wireless Keyboard RGB\",\n  \"description\": \"Compact RGB mechanical keyboard\",\n  \"item_type_id\": 1,\n  \"purchase_date\": \"2026-08-25\",\n  \"price\": 1450.00,\n  \"stock_available\": 20,\n  \"active\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/items/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "items", "1"]
+            },
+            "description": "Updates an existing item."
+          }
+        },
+        {
+          "name": "Delete / Deactivate Item",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/items/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "items", "1"]
+            },
+            "description": "Deletes the item if not referenced in any purchases; marks inactive otherwise."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Purchases",
+      "item": [
+        {
+          "name": "Get Purchase History",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/purchases",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "purchases"]
+            },
+            "description": "Lists all purchases with order summary."
+          }
+        },
+        {
+          "name": "Get Purchase Details by ID (with Multi-table JOIN)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/purchases/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "purchases", "1"]
+            },
+            "description": "Returns full purchase details, lines, item names, and types."
+          }
+        },
+        {
+          "name": "Create Purchase (Atomic Transaction)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"purchase_date\": \"2026-08-25\",\n  \"notes\": \"Office equipment order\",\n  \"items\": [\n    {\n      \"item_id\": 1,\n      \"quantity\": 2\n    },\n    {\n      \"item_id\": 2,\n      \"quantity\": 5\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/purchases",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "purchases"]
+            },
+            "description": "Creates a purchase, creates unique Order ID, deducts stock atomically."
+          }
+        },
+        {
+          "name": "Update Purchase (Stock Differential Adjustment)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"purchase_date\": \"2026-08-25\",\n  \"notes\": \"Updated order quantities\",\n  \"items\": [\n    {\n      \"item_id\": 1,\n      \"quantity\": 3\n    },\n    {\n      \"item_id\": 2,\n      \"quantity\": 4\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/purchases/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "purchases", "1"]
+            },
+            "description": "Updates purchase lines and adjusts inventory stock by quantity difference."
+          }
+        }
+      ]
+    }
+  ]
+}
