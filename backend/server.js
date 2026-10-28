@@ -7,6 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+app.get("/favicon.ico", (req, res) => res.status(204).end());
 app.use(express.static(path.join(__dirname, "../frontend")));
 
 // checks a date like 2026-08-25 (what the date input sends)
@@ -54,7 +55,11 @@ app.get("/api/item-types", async (req, res) => {
     );
     res.json(rows);
   } catch (error) {
-    res.status(500).json({ message: "Could not load item types" });
+    console.error("GET /api/item-types failed:", error.message);
+    res.status(500).json({
+      message: "Could not load item types",
+      detail: error.message
+    });
   }
 });
 
